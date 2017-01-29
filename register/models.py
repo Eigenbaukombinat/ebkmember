@@ -40,6 +40,5 @@ class MemberRegistration(models.Model):
     fee = models.CharField(choices=FEETYPES, default='normal', max_length=100)
     customfee = models.PositiveIntegerField(blank=True, null=True)
     iban = IBANField(include_countries=IBAN_SEPA_COUNTRIES)
-    #bic = BICField()
     sepa_agree = models.BooleanField()
     
