@@ -1,0 +1,74 @@
+{% load staticfiles %}
+
+<html>
+	<head>
+		<title>Eigenbaukombinat – Online Mitglied werden</title>
+        <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+        <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker3.css' %}">
+		<link rel="stylesheet" href="{% static 'css/style.css' %}">
+		<script src="{% static 'js/jquery-2.2.3.min.js' %}"></script>	
+		<script src="{% static 'js/bootstrap-datepicker.js' %}"></script>
+        <script src="{% static 'js/bootstrap.js' %}"></script>
+
+	</head>
+	<body>
+        <div class="container">
+            <div class="row">
+            <div class="col-md-8 col-md-offset-2 col-xs-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3>Anmeldung für {JUNGHACKER} – Programmieren für Kids</h3>
+                    </div>
+                    <div class="panel-body">
+                       <ul class="list-group">
+                        <li class="list-group-item">
+<p>
+Um bei unserer Veranstaltung am 28. Januar 2017 teilnehmen zu können, musst du dich hier anmelden. Bitte sorge dafür, dass du die angegebene E-Mail Adresse regelmäßig abrufst. Bei zu vielen Anmeldungen können wir leider nicht alle berücksichten. Wir melden uns schnellstmöglich bei dir und werden die Anmeldung ggf. vorzeitig schliessen.
+
+
+</p>
+</li>
+</ul>
+                        <form action="{% url 'register' %}" method="POST" class="register-form" id="register">{% csrf_token %}
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-6">
+                                <div class="form-group">
+                                    {{ form.firstname }}
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-6">
+                                <div class="form-group">
+                                    {{ form.lastname }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+					<label>E-Mail Adresse</label>
+                        <div class="form-group">
+                            {{ form.email }}
+                        </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+				<div class="form-group">
+					<label>Dein Alter (am Tag der Veranstaltung)</label>
+				</div>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+				<div class="form-group">
+					{{ form.age }}
+				</div>
+                            </div>
+                        </div>
+                        <button class="btn btn-info btn-block" type="submit" value="Anmelden">Anmelden</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+    </body>
+</html>
