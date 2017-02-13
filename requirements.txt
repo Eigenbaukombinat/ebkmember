@@ -1,4 +1,1 @@
 Django==1.10.5
-django-localflavor
-django-formtools
-django-countries
