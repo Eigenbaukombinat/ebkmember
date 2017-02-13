@@ -1,0 +1,22 @@
+{% load staticfiles %}
+<html>
+	<head>
+		<title>Hackaday registerpage</title>
+        <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+        <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker3.css' %}">
+		<link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link rel="stylesheet" href="{% static 'css/font-awesome.css' %}">
+		<script src="{% static 'js/jquery-2.2.3.min.js' %}"></script>	
+		<script src="{% static 'js/bootstrap-datepicker.js' %}"></script>
+        <script src="{% static 'js/bootstrap.js' %}"></script>
+
+	</head>
+	<body>
+        <div class="container">
+            <div class="row centered-form">
+              {% block center %}  
+              {% endblock %}  
+            </div>
+        </div>
+    </body>
+</html>

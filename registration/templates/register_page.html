@@ -1,0 +1,240 @@
+{% extends 'main.html' %}
+
+
+        {% block center %}
+            <div class="col-xs-12 col-sm-12 col-md-12 col-sm-offset-0 col-md-offset-0">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3>Eigenbaukombinat Online Registrierung</h3>
+                    </div>
+                    <form action="{% url 'register' %}" method="POST" class="register-form" id="register">{% csrf_token %}
+                    <div class="panel-body">
+                        <h4>Anmelden als:</h4>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-6">
+                                <div class="funkyradio">
+                                    <div class="funkyradio-success">
+                                        {{ form.memberstatus.1.tag }}
+                                        <label for="{{form.memberstatus.1.id_for_label}}"><strong>{{form.memberstatus.1.choice_label}}</strong></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-6">
+                                <div class="funkyradio">
+                                    <div class="funkyradio-success">
+                                        {{ form.memberstatus.2.tag }}
+                                        <label for="{{form.memberstatus.2.id_for_label}}"><strong>{{form.memberstatus.2.choice_label}}</strong></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <h4>Ihre Perönlichen Daten</h4>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-6">
+                                <div class="form-group">
+                                    {{ form.name }}
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-6">
+                                <div class="form-group">
+                                    {{ form.sirname }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-6">
+                                <div class="form-group">
+                                    {{ form.email }}
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-6">
+                                <div class="form-group">
+                                    {{ form.phonenumber }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-6">
+                                <div class="form-group">
+                                    <div class="input-group date birth">
+                                        {{ form.birthdate }}
+                                        <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-th"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-6">
+                                <div class="form-group">
+                                    <div class="input-group date entry">
+                                        {{ form.entrydate }}
+                                        <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-th"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <h4>Ihre Anschrift</h4>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-10 col-md-10">
+                                <div class="form-group">
+                                    {{ form.street }}
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-2 col-md-2">
+                                <div class="form-group">
+                                    {{ form.streetnumber }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-2 col-md-2">
+                                <div class="form-group">
+                                    {{ form.postcode }}
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-6">
+                                <div class="form-group">
+                                    {{ form.location }}
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-4 col-md-4">
+                                <div class="form-group">
+                                    {{ form.country }}
+                                </div>
+                            </div>
+                        </div>
+                        <h4>Bezahlinformationen</h4>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-4 col-md-4">
+                                <div class="form-group">
+                                    {{ form.iban }}
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-3 col-md-3">
+                                <div class="form-group">
+                                    {{ form.bic }}
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-5 col-md-5">
+                                <div class="form-group">
+                                    {{ form.bankname }}
+                                </div>
+                            </div>
+                        </div>
+                        <h4>Beitrag</h4>
+                            <div class="row" id="member">
+                                <div class="col-xs-12 col-sm-4 col-md-4">
+                                    <div class="funkyradio">
+                                        <div class="funkyradio-success">
+                                            {{ form.fee.0.tag }}
+                                            <label for="{{form.fee.0.id_for_label}}">Normal 24€</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-3 col-md-3">
+                                    <div class="funkyradio">
+                                        <div class="funkyradio-success">
+                                            {{ form.fee.1.tag }}
+                                            <label for="{{form.fee.1.id_for_label}}">Ermäßigt 18€*</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-5 col-md-5">
+                                    <div class="funkyradio">
+                                        <div class="funkyradio-success">
+                                            {{ form.fee.3.tag }}
+                                            <label for="{{form.fee.3.id_for_label}}">Anderer</label>
+                                        </div>
+                                    </div>
+                                    <div id="member_other">
+                                        <input class="form-control" id="fee_other" name="fee_other" placeholder="min. 24€" type="number">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" id="smember">
+                                <div class="col-xs-12 col-sm-6 col-md-6">
+                                    <div class="funkyradio">
+                                        <div class="funkyradio-success">
+                                            {{ form.fee.2.tag }}
+                                            <label for="{{form.fee.2.id_for_label}}">5€</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-6">
+                                    <div class="funkyradio">
+                                        <div class="funkyradio-success">
+                                            {{ form.fee.4.tag }}
+                                            <label for="{{form.fee.4.id_for_label}}">Anderer</label>
+                                        </div>
+                                    </div>
+                                    <div id="smember_other">
+                                        <input class="form-control" id="fee_sustain_other" name="fee_sustian_other" placeholder="min. 5€" type="number">
+                                    </div>
+                                </div>
+                            </div>
+                        <hr></hr>
+                        <button class="btn btn-info btn-block" type="submit" value="Register"><strong>Weiter</strong></button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+            </div>
+
+        <script>
+        $('.input-group.date.birth').datepicker({
+            startView: 2,
+            maxViewMode: 3,
+            startDate: '-99y',
+            endDate: '-10y',
+            todayHighlight: true
+        });
+        $('.input-group.date.entry').datepicker({
+            startView: 1,
+            maxViewMode: 3,
+            startDate: '1m',
+            todayHighlight: true
+        });
+        $(function () {
+            $('#smember').hide();
+            $('.memberstatus').change(function(){
+                 selected = $('input[name=memberstatus]:checked').val();
+                 if (selected == 'member'){
+                    $('#smember').hide();
+                    $('#member').show();
+                 } else if (selected == 'sustaining_member') {
+                    $('#member').hide();
+                    $('#smember').show();
+                 } 
+                });
+            });
+        $(function () {
+            $('#member_other').hide();
+            $('#smember_other').hide();
+            $('#{{form.fee.3.id_for_label}}').click(function(){
+                $('#member_other').show();
+            });
+            $('#{{form.fee.1.id_for_label}}').click(function(){
+                $('#member_other').hide();
+            });
+            $('#{{form.fee.0.id_for_label}}').click(function(){
+                $('#member_other').hide();
+            });
+            $('#{{form.fee.2.id_for_label}}').click(function(){
+                $('#smember_other').hide();
+            });
+            $('#{{form.fee.4.id_for_label}}').click(function(){
+                $('#smember_other').show();
+            });
+        });
+        $(function (){
+            $('#fee_other').change(function() {
+                value = $('#fee_other').val();
+                $('#{{form.fee.3.id_for_label}}').val(value);
+            });
+            $('#fee_sustain_other').change(function() {
+                value = $('#fee_sustain_other').val();
+                $('#{{form.fee.4.id_for_label}}').val(value);
+            });
+        });
+        </script>
+    {% endblock %}

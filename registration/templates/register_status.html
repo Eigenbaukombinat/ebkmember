@@ -1,0 +1,25 @@
+{% extends 'main.html' %}
+
+
+            {% block center %}
+            <div class="col-xs-12 col-sm-12 col-md-12 col-sm-offset-0 col-md-offset-0">
+                <div class="panel panel-default"> 
+                    <div class="panel-heading">
+                        <h3>Eigenbaukombinat Online Registrierung</h3>
+                    </div>
+                    <div class="panel-body">
+                        {% if status == 'success' %}
+                        <p>
+                            Die Registrierung war erfolgreich. Bitte warte bis deine Anfrage bearbeitet wurde [blabla.....]
+                        </p>
+                        <hr></hr>
+                        <button class="btn btn-success btn-block"><strong>Download</strong></button>
+                        {% elif status == 'registered' %}
+                        <p>
+                            Du bist bereits registriert. Falls dies nicht der Fall sein sollte schreibe bitte eine Mail an: bla@bla.bla
+                        </p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endblock %}
