@@ -1,6 +1,7 @@
 from django import forms
 from .models import *
 from .choices import *
+from django_countries.widgets import CountrySelectWidget
 
 class MemberForm(forms.ModelForm):
     '''form for Attendee model'''
@@ -34,7 +35,7 @@ class MemberForm(forms.ModelForm):
             'streetnumber': forms.TextInput(attrs={'class':'form-control input-sm', 'placeholder':'Hausnummer'}),
             'postcode': forms.TextInput(attrs={'class':'form-control input-sm', 'placeholder':'Postleitzahl'}),
             'location': forms.TextInput(attrs={'class':'form-control input-sm', 'placeholder':'Ort'}),
-            'country': forms.TextInput(attrs={'class':'form-control input-sm', 'placeholder':'Land'}),
+            'country': CountrySelectWidget(attrs={'class':'form-control input-sm', 'placeholder':'Land'}),
             'email': forms.EmailInput(attrs={'class':'form-control input-sm', 'placeholder':'Emailadresse'}),
             'phonenumber': forms.TextInput(attrs={'class':'form-control input-sm', 'placeholder':'Telefonnummer'}),
             'birthdate': forms.DateInput(attrs={'class':'form-control input-sm', 'placeholder':'Geburtstag'}),

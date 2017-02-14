@@ -2,6 +2,7 @@ from django.db import models
 from .choices import *
 from django.utils import timezone
 import datetime
+from django_countries.fields import CountryField
 
 class Member(models.Model):
     
@@ -12,7 +13,7 @@ class Member(models.Model):
     streetnumber = models.CharField(max_length = 10)
     postcode = models.CharField(max_length = 15)
     location = models.CharField(max_length = 250)
-    country = models.CharField(max_length = 250)
+    country = CountryField(blank_label='Select Country')
     email = models.EmailField()
     phonenumber = models.CharField(max_length = 25)
     birthdate = models.DateField()

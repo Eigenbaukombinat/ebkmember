@@ -61,8 +61,8 @@ body{
   position: relative;
   line-height: 2.5em;
   text-indent: 3.25em;
-  margin-top: 1em;
-  margin-bottom: 2em;
+  margin-top: 10px;
+  margin-bottom: 10px;
   cursor: pointer;
   -webkit-user-select: none;
      -moz-user-select: none;

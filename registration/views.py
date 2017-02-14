@@ -91,7 +91,7 @@ def preview(request):
                                             sirname=preview_data['sirname'], 
                                             email=preview_data['email']
                                         ).exists() == False:
-                                            
+                    import pdb; pdb.set_trace()                        
                     member = Member()
                     member.name = preview_data['name']
                     member.sirname = preview_data['sirname']
