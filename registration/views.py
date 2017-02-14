@@ -1,5 +1,8 @@
 from django.shortcuts import render
 from django.core.mail import send_mail, BadHeaderError
+from localflavor.generic.checksums import luhn
+from localflavor.generic.checksums import ean
+from localflavor.generic.checksums import ean
 import ast
 import datetime
 from .models import *
@@ -26,9 +29,10 @@ def register(request):
     
     if request.method == 'POST':
         form = MemberForm(request.POST)
+        import pdb; pdb.set_trace()
         if form.is_valid():
             name = form.cleaned_data['name']
-            sirname = form.cleaned_data['sirname']
+            surname = form.cleaned_data['surname']
             street = form.cleaned_data['street']
             streetnumber = form.cleaned_data['streetnumber']
             postcode = form.cleaned_data['postcode']
@@ -37,9 +41,9 @@ def register(request):
             email = form.cleaned_data['email']
             phonenumber = form.cleaned_data['phonenumber']
             birthdate = form.cleaned_data['birthdate']
-            birthdate = birthdate.strftime('%d/%m/%Y')   
+            birthdate = birthdate.strftime('%d.%m.%Y')   
             entrydate = form.cleaned_data['entrydate']
-            entrydate = entrydate.strftime('%d/%m/%Y')
+            entrydate = entrydate.strftime('%d.%m.%Y')
             fee = form.cleaned_data['fee']
             iban = form.cleaned_data['iban']
             bic = form.cleaned_data['bic']
@@ -49,7 +53,7 @@ def register(request):
             #encapsulate to preview on next page
             preview_data = {
                 'name':name,
-                'sirname':sirname,
+                'surname':surname,
                 'street':street,
                 'streetnumber':streetnumber,
                 'postcode':postcode,
@@ -66,6 +70,7 @@ def register(request):
                 'memberstatus':memberstatus,
             }
             form = AgreementForm()
+            #import pdb; pdb.set_trace()
             return render(request, 'register_preview.html', {'preview_data':preview_data, 'form':form})
     
     form = MemberForm()
@@ -88,13 +93,13 @@ def preview(request):
                 #check if member with this name already exists if not proceed
                 if Member.objects.filter(
                                             name=preview_data['name'], 
-                                            sirname=preview_data['sirname'], 
+                                            surname=preview_data['surname'], 
                                             email=preview_data['email']
                                         ).exists() == False:
-                    import pdb; pdb.set_trace()                        
+                                            
                     member = Member()
                     member.name = preview_data['name']
-                    member.sirname = preview_data['sirname']
+                    member.surname = preview_data['surname']
                     member.street = preview_data['street']
                     member.streetnumber = preview_data['streetnumber']
                     member.postcode = preview_data['postcode']

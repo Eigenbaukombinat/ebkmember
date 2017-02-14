@@ -10,7 +10,7 @@ class MemberForm(forms.ModelForm):
         model = Member
         fields = [
             'name',
-            'sirname',
+            'surname',
             #'sex',
             'street',
             'streetnumber',
@@ -29,7 +29,7 @@ class MemberForm(forms.ModelForm):
             ]
         widgets = {
             'name': forms.TextInput(attrs={'class':'form-control input-sm', 'placeholder':'Vorname'}),
-            'sirname': forms.TextInput(attrs={'class':'form-control input-sm', 'placeholder':'Nachname'}),
+            'surname': forms.TextInput(attrs={'class':'form-control input-sm', 'placeholder':'Nachname'}),
             #'sex': forms.Select(attrs={'class':'form-control'}),
             'street': forms.TextInput(attrs={'class':'form-control input-sm', 'placeholder':'Straße'}),
             'streetnumber': forms.TextInput(attrs={'class':'form-control input-sm', 'placeholder':'Hausnummer'}),
@@ -38,11 +38,11 @@ class MemberForm(forms.ModelForm):
             'country': CountrySelectWidget(attrs={'class':'form-control input-sm', 'placeholder':'Land'}),
             'email': forms.EmailInput(attrs={'class':'form-control input-sm', 'placeholder':'Emailadresse'}),
             'phonenumber': forms.TextInput(attrs={'class':'form-control input-sm', 'placeholder':'Telefonnummer'}),
-            'birthdate': forms.DateInput(attrs={'class':'form-control input-sm', 'placeholder':'Geburtstag'}),
-            'entrydate': forms.DateInput(attrs={'class':'form-control input-sm', 'placeholder':'Eintrittsdatum'}),
+            'birthdate': forms.DateInput(attrs={'class':'form-control input-sm', 'placeholder':'Geburtstag'}, format='%d.%m.%Y'),
+            'entrydate': forms.DateInput(attrs={'class':'form-control input-sm', 'placeholder':'Eintrittsdatum'}, format='%d.%m.%Y'),
             'fee': forms.RadioSelect(attrs={}, choices=FEE),
-            'iban': forms.TextInput(attrs={'class':'form-control input-sm', 'placeholder':'IBAN'}),
-            'bic': forms.TextInput(attrs={'class':'form-control input-sm', 'placeholder':'BIC'}),
+            'iban': forms.TextInput(attrs={'class':'form-control input-sm', 'placeholder':'IBAN', 'data-validation':'iban', 'data-validation-error-msg':'IBAN Inkorrekt', 'data-validation-error-msg-container':'#email-error-dialog'}),
+            'bic': forms.TextInput(attrs={'class':'form-control input-sm', 'placeholder':'BIC', 'data-validation':'bic'}),
             'bankname': forms.TextInput(attrs={'class':'form-control input-sm', 'placeholder':'Kreditinstitut'}),
             'memberstatus': forms.RadioSelect(attrs={'class':'memberstatus'}),
         }

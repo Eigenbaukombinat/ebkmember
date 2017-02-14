@@ -28,7 +28,7 @@
                                 </div>
                             </div>
                         </div>
-                        <h4>Ihre Perönlichen Daten</h4>
+                        <h4>Ihre Persönlichen Daten</h4>
                         <div class="row">
                             <div class="col-xs-12 col-sm-6 col-md-6">
                                 <div class="form-group">
@@ -106,6 +106,7 @@
                         <h4>Bezahlinformationen</h4>
                         <div class="row">
                             <div class="col-xs-12 col-sm-4 col-md-4">
+                                <div id="iban-error-dialog"></div>
                                 <div class="form-group">
                                     {{ form.iban }}
                                 </div>
@@ -182,6 +183,7 @@
 
         <script>
         $('.input-group.date.birth').datepicker({
+            format: 'dd.mm.yyyy',
             startView: 2,
             maxViewMode: 3,
             startDate: '-99y',
@@ -189,6 +191,7 @@
             todayHighlight: true
         });
         $('.input-group.date.entry').datepicker({
+            format: 'dd.mm.yyyy',
             startView: 1,
             maxViewMode: 3,
             startDate: '1m',
@@ -236,5 +239,11 @@
                 $('#{{form.fee.4.id_for_label}}').val(value);
             });
         });
+        </script>
+        <script>
+            $.validate({
+              modules : 'sepa',
+              errorMessagePosition: 'top'
+            });
         </script>
     {% endblock %}

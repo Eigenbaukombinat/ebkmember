@@ -3,11 +3,13 @@ from .choices import *
 from django.utils import timezone
 import datetime
 from django_countries.fields import CountryField
+from localflavor.generic.models import IBANField, BICField
+from localflavor.generic.countries.sepa import IBAN_SEPA_COUNTRIES
 
 class Member(models.Model):
     
     name = models.CharField(max_length = 150)
-    sirname = models.CharField(max_length = 250)
+    surname = models.CharField(max_length = 250)
     sex = models.CharField(max_length = 25, choices=SEX)
     street = models.CharField(max_length = 250)
     streetnumber = models.CharField(max_length = 10)
@@ -19,8 +21,8 @@ class Member(models.Model):
     birthdate = models.DateField()
     entrydate = models.DateField()
     fee = models.FloatField()
-    iban = models.CharField(max_length = 34)
-    bic = models.CharField(max_length = 11)
+    iban = IBANField(include_countries=IBAN_SEPA_COUNTRIES)
+    bic = BICField()
     bankname = models.CharField(max_length = 250)
     memberstatus = models.CharField(max_length = 25, choices=MEMBERSTATUS)
     status = models.CharField(max_length = 25, choices=STATUS)
