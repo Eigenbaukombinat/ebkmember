@@ -10,7 +10,6 @@ class Member(models.Model):
     
     name = models.CharField(max_length = 150)
     surname = models.CharField(max_length = 250)
-    sex = models.CharField(max_length = 25, choices=SEX)
     street = models.CharField(max_length = 250)
     streetnumber = models.CharField(max_length = 10)
     postcode = models.CharField(max_length = 15)
@@ -22,8 +21,6 @@ class Member(models.Model):
     entrydate = models.DateField()
     fee = models.FloatField()
     iban = IBANField(include_countries=IBAN_SEPA_COUNTRIES)
-    bic = BICField()
-    bankname = models.CharField(max_length = 250)
     memberstatus = models.CharField(max_length = 25, choices=MEMBERSTATUS)
     status = models.CharField(max_length = 25, choices=STATUS)
     sepa_agree = models.BooleanField(default=False, blank=False)

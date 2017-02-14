@@ -20,17 +20,13 @@ class MemberForm(forms.ModelForm):
             'email',
             'phonenumber',
             'birthdate',
-            'entrydate',
             'fee',
             'iban',
-            'bic',
-            'bankname',
             'memberstatus',
             ]
         widgets = {
             'name': forms.TextInput(attrs={'class':'form-control input-sm', 'placeholder':'Vorname'}),
             'surname': forms.TextInput(attrs={'class':'form-control input-sm', 'placeholder':'Nachname'}),
-            #'sex': forms.Select(attrs={'class':'form-control'}),
             'street': forms.TextInput(attrs={'class':'form-control input-sm', 'placeholder':'Straße'}),
             'streetnumber': forms.TextInput(attrs={'class':'form-control input-sm', 'placeholder':'Hausnummer'}),
             'postcode': forms.TextInput(attrs={'class':'form-control input-sm', 'placeholder':'Postleitzahl'}),
@@ -39,11 +35,8 @@ class MemberForm(forms.ModelForm):
             'email': forms.EmailInput(attrs={'class':'form-control input-sm', 'placeholder':'Emailadresse'}),
             'phonenumber': forms.TextInput(attrs={'class':'form-control input-sm', 'placeholder':'Telefonnummer'}),
             'birthdate': forms.DateInput(attrs={'class':'form-control input-sm', 'placeholder':'Geburtstag'}, format='%d.%m.%Y'),
-            'entrydate': forms.DateInput(attrs={'class':'form-control input-sm', 'placeholder':'Eintrittsdatum'}, format='%d.%m.%Y'),
             'fee': forms.RadioSelect(attrs={}, choices=FEE),
-            'iban': forms.TextInput(attrs={'class':'form-control input-sm', 'placeholder':'IBAN', 'data-validation':'iban', 'data-validation-error-msg':'IBAN Inkorrekt', 'data-validation-error-msg-container':'#email-error-dialog'}),
-            'bic': forms.TextInput(attrs={'class':'form-control input-sm', 'placeholder':'BIC', 'data-validation':'bic'}),
-            'bankname': forms.TextInput(attrs={'class':'form-control input-sm', 'placeholder':'Kreditinstitut'}),
+            'iban': forms.TextInput(attrs={'class':'form-control input-sm', 'placeholder':'IBAN', 'data-validation':'iban'}),
             'memberstatus': forms.RadioSelect(attrs={'class':'memberstatus'}),
         }
         

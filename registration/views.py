@@ -46,8 +46,6 @@ def register(request):
             entrydate = entrydate.strftime('%d.%m.%Y')
             fee = form.cleaned_data['fee']
             iban = form.cleaned_data['iban']
-            bic = form.cleaned_data['bic']
-            bankname = form.cleaned_data['bankname']
             memberstatus = form.cleaned_data['memberstatus']
             
             #encapsulate to preview on next page
@@ -65,8 +63,6 @@ def register(request):
                 'entrydate':entrydate,
                 'fee':fee,
                 'iban':iban,
-                'bic':bic,
-                'bankname':bankname,
                 'memberstatus':memberstatus,
             }
             form = AgreementForm()
@@ -111,8 +107,6 @@ def preview(request):
                     member.entrydate = datetime.datetime.strptime(preview_data['entrydate'], '%d/%m/%Y')
                     member.fee = preview_data['fee']
                     member.iban = preview_data['iban']
-                    member.bic = preview_data['bic']
-                    member.bankname = preview_data['bankname']
                     member.memberstatus = preview_data['memberstatus']
                     member.status = 'pending'
                     member.sepa_agree = form.cleaned_data['sepa_agree']
