@@ -29,7 +29,7 @@ def register(request):
     
     if request.method == 'POST':
         form = MemberForm(request.POST)
-        import pdb; pdb.set_trace()
+        #import pdb; pdb.set_trace()
         if form.is_valid():
             name = form.cleaned_data['name']
             surname = form.cleaned_data['surname']
@@ -42,8 +42,6 @@ def register(request):
             phonenumber = form.cleaned_data['phonenumber']
             birthdate = form.cleaned_data['birthdate']
             birthdate = birthdate.strftime('%d.%m.%Y')   
-            entrydate = form.cleaned_data['entrydate']
-            entrydate = entrydate.strftime('%d.%m.%Y')
             fee = form.cleaned_data['fee']
             iban = form.cleaned_data['iban']
             memberstatus = form.cleaned_data['memberstatus']
@@ -60,7 +58,6 @@ def register(request):
                 'email':email,
                 'phonenumber':phonenumber,
                 'birthdate':birthdate,
-                'entrydate':entrydate,
                 'fee':fee,
                 'iban':iban,
                 'memberstatus':memberstatus,
@@ -115,7 +112,6 @@ def preview(request):
                     member.save()
                     return render(request, 'register_status.html', {'status':'success'})
                     
-                else:
                     try:
                         send_mail(
                             'Eigenbaukombinat Online Registrierung',
@@ -132,8 +128,10 @@ def preview(request):
                             fail_silently=False,
                             )
                     except:
-                        return render(request, 'resgister_status.html',{'status':'notsend'})
-                        
+                        return render(request, 'register_status.html',{'status':'notsend'})
+                    
+                    return render(request, 'register_status.html',{'status':'success'})
+                else:
                     return render(request, 'register_status.html', {'status':'registered'})
             else:
                 return render(request, 'register_preview.html', {'form':form, 'preview_data':preview_data, 'status':'failed'})
