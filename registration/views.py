@@ -133,8 +133,3 @@ def preview(request):
     
     form = AgreementForm()
     return render(request, 'register_preview.html', {'form':form})
-
-def status(request):
-    '''last page to show successfull registration and download registration data'''
-    
-    return render(request, 'register_status.html', {'status':'success'})
