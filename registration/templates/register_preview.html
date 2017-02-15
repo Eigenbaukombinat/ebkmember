@@ -1,0 +1,161 @@
+{% extends 'main.html' %}
+
+            {% block center %} 
+            <div class="col-xs-12 col-sm-12 col-md-12 col-sm-offset-0 col-md-offset-0">
+                <div class="panel panel-default"> 
+                    <div class="panel-heading">
+                        <h3>Eigenbaukombinat Online Registrierung</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="col-xs-12 col-sm-12 col-md-12">
+                        <h4>Anmelden als:</h4>
+                        <div class="row">
+                                {% if preview_data.memberstatus == 'member' %}
+                            <div class="col-xs-12 col-sm-6 col-md-6">
+                                <h5>Mitglied</h5>
+                            </div>
+                                {% else %}
+                            <div class="col-xs-12 col-sm-6 col-md-6">
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-6">
+                                <h5>Fördermitglied</h5>
+                            </div>
+                                {% endif %}
+                        </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-6">
+                        <h4>Ihre persönlichen Daten:</h4>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <p>
+                                    {{ preview_data.name }}
+                                    {{ preview_data.surname }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <p>
+                                    {{ preview_data.street }}
+                                    {{ preview_data.streetnumber }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <p>
+                                    {{ preview_data.postcode }}
+                                    {{ preview_data.location }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <p>
+                                    {{ preview_data.country }}
+                                    {{ preview_data.email }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <p>
+                                    {{ preview_data.phonenumber }}
+                                    {{ preview_data.birthdate }}
+                                </p>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-6">
+                        <h4>Beitrag</h4>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <p>
+                                   Der monatliche Beitrag beträgt {{ preview_data.fee }}€
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <p>
+                                    {{ preview_data.iban }}
+                                </p>
+                            </div>
+                        </div>
+                        </div>
+                        <hr></hr>
+                        <form action="{% url 'preview' %}" method="POST" class="register-form" id="preview">{% csrf_token %}
+                        <div class="row">
+                            {% if status == 'failed' %}
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="box red">
+                                        <p>
+                                            <span class="fa fa-exclamation-triangle"></span>
+                                            Bitte akzeptieren Sie die nachfolgenden Bedingungen um die Registrierung erfolgreich abzuschließen.
+                                        <p>
+                                    </div>
+                                </div>
+                            {% endif %}
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="funkyradio">
+                                        <div class="funkyradio-success">
+                                            {{ form.rules_agree }}
+                                            <label for="{{form.rules_agree.id_for_label}}"><strong>Ich erkenne die Satzung des Eigenbaukombinats Halle e. V. an</strong></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="funkyradio">
+                                        <div class="funkyradio-success">
+                                            {{ form.privacy_agree }}
+                                            <label for="{{form.privacy_agree.id_for_label}}"><strong>Ich akzeptiere die Datenschutzbedingungen</strong></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12 infotext">
+                                    <p>
+                                    Ich bin damit einverstanden, dass meine persönlichen Daten (Name, Anschrift, E-Mail-Adresse) durch das
+                                    Eigenbaukombinat Halle e. V. für postalische und elektronische Kontaktaufnahme genutzt werden kann und bin ferner
+                                    damit einverstanden, dass das Eigenbaukombinat Halle e. V. sich bei der Datenverarbeitung eines
+                                    Dienstleistungsunternehmens bedienen und die persönlichen Daten in einem Datenbankserver dieses
+                                    Dienstleistungsunternehmen erhebt.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="funkyradio">
+                                        <div class="funkyradio-success">
+                                            {{ form.sepa_agree }}
+                                            <label for="{{form.sepa_agree.id_for_label}}"><strong>Ich erteile dem Eigenbaukombinat Halle e. V. ein SEPA-Lastschriftmandat</strong></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12 infotext">
+                                    <p>
+                                    Eigenbaukombinat Halle e. V., Landsberger Str. 3, 06112 Halle (Saale)<br>
+                                    Gläubiger-Identifikationsnummer DE04ZZZ00000651349<br>
+                                    Mandatsreferenz wird separat mitgeteilt (entspricht Mitgliedsnummer)
+                                    </p>
+                                    <p>
+                                    Ich ermächtige das Eigenbaukombinat Halle e. V., Zahlungen von meinem Konto mittels Lastschrift einzuziehen.
+                                    Zugleich weise ich mein Kreditinstitut an, die vom Eigenbaukombinat Halle e. V. auf mein Konto gezogenen
+                                    Lastschriften einzulösen. Ich stimme einer verkürzten Frist zur Vorinformation (Pre-Notification) von einem Tag zu.
+                                    </p>
+                                    <p>
+                                    Hinweis: Ich kann innerhalb von acht Wochen, beginnend mit dem Belastungsdatum, die Erstattung des belasteten
+                                    Betrages verlangen. Es gelten dabei die mit meinem Kreditinstitut vereinbarten Bedingungen.
+                                    </p>
+                                </div>
+                            </div>
+                            <div style="display: none">{{ memberform.as_p }}</div>
+                        <hr></hr>
+                        <button class="btn btn-info btn-block" type="submit" value="Register"><strong>Jetzt kostenpflichtig Mitglied werden</strong></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            {% endblock %}
