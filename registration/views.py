@@ -10,12 +10,10 @@ from .forms import *
 
 
 ##  TODO:
-##  - check if bank data is valid
 ##  - check if address data is valid
 ##  - PDF download of registration data with AGBs, ...
 ##  - improve design
 ##  - improve email text
-##  - add countrylist
 
 
 ## mail to send message if someone signed up
@@ -28,28 +26,28 @@ def register(request):
     '''First register page to input personal data'''
     
     if request.method == 'POST':
-        form = MemberForm(request.POST)
+        memberform = MemberForm(request.POST)
         #import pdb; pdb.set_trace()
-        if form.is_valid():
-            name = form.cleaned_data['name']
-            surname = form.cleaned_data['surname']
-            street = form.cleaned_data['street']
-            streetnumber = form.cleaned_data['streetnumber']
-            postcode = form.cleaned_data['postcode']
-            location = form.cleaned_data['location']
-            country = form.cleaned_data['country']
-            email = form.cleaned_data['email']
-            phonenumber = form.cleaned_data['phonenumber']
-            birthdate = form.cleaned_data['birthdate']
-            birthdate = birthdate.strftime('%d.%m.%Y')   
-            fee = form.cleaned_data['fee']
-            iban = form.cleaned_data['iban']
-            memberstatus = form.cleaned_data['memberstatus']
+        if memberform.is_valid():
+            name = memberform.cleaned_data['name']
+            surname = memberform.cleaned_data['surname']
+            street = memberform.cleaned_data['street']
+            streetnumber = memberform.cleaned_data['streetnumber']
+            postcode = memberform.cleaned_data['postcode']
+            location = memberform.cleaned_data['location']
+            country = memberform.cleaned_data['country']
+            email = memberform.cleaned_data['email']
+            phonenumber = memberform.cleaned_data['phonenumber']
+            birthdate = memberform.cleaned_data['birthdate']
+            birthdate = birthdate.strftime('%d/%m/%Y')   
+            fee = memberform.cleaned_data['fee']
+            iban = memberform.cleaned_data['iban']
+            memberstatus = memberform.cleaned_data['memberstatus']
             
             #encapsulate to preview on next page
             preview_data = {
                 'name':name,
-                'surname':surname,
+                'sirname':sirname,
                 'street':street,
                 'streetnumber':streetnumber,
                 'postcode':postcode,
@@ -63,8 +61,7 @@ def register(request):
                 'memberstatus':memberstatus,
             }
             form = AgreementForm()
-            #import pdb; pdb.set_trace()
-            return render(request, 'register_preview.html', {'preview_data':preview_data, 'form':form})
+            return render(request, 'register_preview.html', {'preview_data':preview_data, 'form':form, 'memberform':memberform})
     
     form = MemberForm()
     
@@ -76,35 +73,34 @@ def preview(request):
     
     if request.method == 'POST':
         form = AgreementForm(request.POST)
-        preview_data = ast.literal_eval(request.POST['preview_data'])
-        if form.is_valid():
-            #import pdb; pdb.set_trace()
+        memberform = MemberForm(request.POST)
+        if form.is_valid() and memberform.is_valid():
+            import pdb; pdb.set_trace()
             #check if rules are accepted if not show message
             if form.cleaned_data['sepa_agree'] == True and \
                 form.cleaned_data['rules_agree'] == True and \
                 form.cleaned_data['privacy_agree'] == True:
                 #check if member with this name already exists if not proceed
                 if Member.objects.filter(
-                                            name=preview_data['name'], 
-                                            surname=preview_data['surname'], 
-                                            email=preview_data['email']
+                                            name=memberform.cleaned_data['name'], 
+                                            surname=memberform.cleaned_data['surname'], 
+                                            email=memberform.cleaned_data['email']
                                         ).exists() == False:
                                             
                     member = Member()
-                    member.name = preview_data['name']
-                    member.surname = preview_data['surname']
-                    member.street = preview_data['street']
-                    member.streetnumber = preview_data['streetnumber']
-                    member.postcode = preview_data['postcode']
-                    member.location = preview_data['location']
-                    member.country = preview_data['country']
-                    member.email = preview_data['email']
-                    member.phonenumber = preview_data['phonenumber']
-                    member.birthdate = datetime.datetime.strptime(preview_data['birthdate'], '%d/%m/%Y')
-                    member.entrydate = datetime.datetime.strptime(preview_data['entrydate'], '%d/%m/%Y')
-                    member.fee = preview_data['fee']
-                    member.iban = preview_data['iban']
-                    member.memberstatus = preview_data['memberstatus']
+                    member.name = memberform.cleaned_data['name']
+                    member.surname = memberform.cleaned_data['surname']
+                    member.street = memberform.cleaned_data['street']
+                    member.streetnumber = memberform.cleaned_data['streetnumber']
+                    member.postcode = memberform.cleaned_data['postcode']
+                    member.location = memberform.cleaned_data['location']
+                    member.country = memberform.cleaned_data['country']
+                    member.email = memberform.cleaned_data['email']
+                    member.phonenumber = memberform.cleaned_data['phonenumber']
+                    member.birthdate = memberform.cleaned_data['birthdate']
+                    member.fee = memberform.cleaned_data['fee']
+                    member.iban = memberform.cleaned_data['iban']
+                    member.memberstatus = memberform.cleaned_data['memberstatus']
                     member.status = 'pending'
                     member.sepa_agree = form.cleaned_data['sepa_agree']
                     member.rules_agree = form.cleaned_data['rules_agree']

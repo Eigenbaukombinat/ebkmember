@@ -11,7 +11,6 @@ class MemberForm(forms.ModelForm):
         fields = [
             'name',
             'surname',
-            #'sex',
             'street',
             'streetnumber',
             'postcode',
