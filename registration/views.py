@@ -47,7 +47,7 @@ def register(request):
             #encapsulate to preview on next page
             preview_data = {
                 'name':name,
-                'sirname':sirname,
+                'surname':surname,
                 'street':street,
                 'streetnumber':streetnumber,
                 'postcode':postcode,
@@ -75,7 +75,7 @@ def preview(request):
         form = AgreementForm(request.POST)
         memberform = MemberForm(request.POST)
         if form.is_valid() and memberform.is_valid():
-            import pdb; pdb.set_trace()
+            #import pdb; pdb.set_trace()
             #check if rules are accepted if not show message
             if form.cleaned_data['sepa_agree'] == True and \
                 form.cleaned_data['rules_agree'] == True and \
@@ -106,31 +106,30 @@ def preview(request):
                     member.rules_agree = form.cleaned_data['rules_agree']
                     member.privacy_agree = form.cleaned_data['privacy_agree']
                     member.save()
-                    return render(request, 'register_status.html', {'status':'success'})
-                    
-                    try:
-                        send_mail(
-                            'Eigenbaukombinat Online Registrierung',
-                            'Deine Registrierung für das Eigenbaukombinat ist erfolgreich eingegangen. Bitte habe noch etwas Geduld bis diese bestätigt wurde.',
-                            SENDER_MAIL,
-                            [member.email],
-                            fail_silently=False,
-                            )
-                        send_mail(
-                            'Eigenbaukombinat Online Registrierung',
-                            'Ein neues Mitglied hat sich registriert',
-                            SENDER_MAIL,
-                            [MAIL],
-                            fail_silently=False,
-                            )
-                    except:
-                        return render(request, 'register_status.html',{'status':'notsend'})
+                                    
+                  #  try:
+                  #      send_mail(
+                  #          'Eigenbaukombinat Online Registrierung',
+                  #          'Deine Registrierung für das Eigenbaukombinat ist erfolgreich eingegangen. Bitte habe noch etwas Geduld bis diese bestätigt wurde.',
+                  #          SENDER_MAIL,
+                  #          [member.email],
+                  #          fail_silently=False,
+                  #          )
+                  #      send_mail(
+                  #          'Eigenbaukombinat Online Registrierung',
+                  #          'Ein neues Mitglied hat sich registriert',
+                  #          SENDER_MAIL,
+                  #          [MAIL],
+                  #          fail_silently=False,
+                  #          )
+                  #  except:
+                  #      return render(request, 'register_status.html',{'status':'notsend'})
                     
                     return render(request, 'register_status.html',{'status':'success'})
                 else:
                     return render(request, 'register_status.html', {'status':'registered'})
             else:
-                return render(request, 'register_preview.html', {'form':form, 'preview_data':preview_data, 'status':'failed'})
+                return render(request, 'register_preview.html', {'form':form, 'memberform':memberform, 'status':'failed'})
     
     form = AgreementForm()
     return render(request, 'register_preview.html', {'form':form})
