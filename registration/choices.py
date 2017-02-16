@@ -26,4 +26,6 @@ FEE = (
     (1, 'sustain_other'),
     (18, 'junior'),
     (1, 'junior_other'),
+    (12341, 'company_other'),
+    (1, 'company_other'),
     )

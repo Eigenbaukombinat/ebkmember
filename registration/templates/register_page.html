@@ -124,24 +124,24 @@
                                 <div class="col-xs-12 col-sm-4 col-md-4">
                                     <div class="funkyradio">
                                         <div class="funkyradio-success">
-                                            {{ form.fee.0.tag }}
-                                            <label for="{{form.fee.0.id_for_label}}">Normal 24€</label>
+                                            {{ feeform.fee.0.tag }}
+                                            <label for="{{feeform.fee.0.id_for_label}}">Normal 24€</label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-3 col-md-3">
                                     <div class="funkyradio">
                                         <div class="funkyradio-success">
-                                            {{ form.fee.1.tag }}
-                                            <label for="{{form.fee.1.id_for_label}}">Ermäßigt 18€*</label>
+                                            {{ feeform.fee.1.tag }}
+                                            <label for="{{feeform.fee.1.id_for_label}}">Ermäßigt 18€*</label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-5 col-md-5">
                                     <div class="funkyradio">
                                         <div class="funkyradio-success">
-                                            {{ form.fee.3.tag }}
-                                            <label for="{{form.fee.3.id_for_label}}">Anderer</label>
+                                            {{ feeform.fee.3.tag }}
+                                            <label for="{{feeform.fee.3.id_for_label}}">Anderer</label>
                                         </div>
                                     </div>
                                     <div id="member_other">
@@ -153,16 +153,16 @@
                                 <div class="col-xs-12 col-sm-6 col-md-6">
                                     <div class="funkyradio">
                                         <div class="funkyradio-success">
-                                            {{ form.fee.2.tag }}
-                                            <label for="{{form.fee.2.id_for_label}}">5€</label>
+                                            {{ feeform.fee.2.tag }}
+                                            <label for="{{feeform.fee.2.id_for_label}}">5€</label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-6 col-md-6">
                                     <div class="funkyradio">
                                         <div class="funkyradio-success">
-                                            {{ form.fee.4.tag }}
-                                            <label for="{{form.fee.4.id_for_label}}">Anderer</label>
+                                            {{ feeform.fee.4.tag }}
+                                            <label for="{{feeform.fee.4.id_for_label}}">Anderer</label>
                                         </div>
                                     </div>
                                     <div id="smember_other">
@@ -174,16 +174,16 @@
                                 <div class="col-xs-12 col-sm-6 col-md-6">
                                     <div class="funkyradio">
                                         <div class="funkyradio-success">
-                                            {{ form.fee.5.tag }}
-                                            <label for="{{form.fee.5.id_for_label}}">5€</label>
+                                            {{ feeform.fee.5.tag }}
+                                            <label for="{{feeform.fee.5.id_for_label}}">18€*</label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-6 col-md-6">
                                     <div class="funkyradio">
                                         <div class="funkyradio-success">
-                                            {{ form.fee.6.tag }}
-                                            <label for="{{form.fee.6.id_for_label}}">Anderer</label>
+                                            {{ feeform.fee.6.tag }}
+                                            <label for="{{feeform.fee.6.id_for_label}}">Anderer</label>
                                         </div>
                                     </div>
                                     <div id="jmember_other">
@@ -191,7 +191,29 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row" id="cmember">
+                                <div class="col-xs-12 col-sm-6 col-md-6">
+                                    <div class="funkyradio">
+                                        <div class="funkyradio-success">
+                                            {{ feeform.fee.7.tag }}
+                                            <label for="{{feeform.fee.7.id_for_label}}">12341€</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-6">
+                                    <div class="funkyradio">
+                                        <div class="funkyradio-success">
+                                            {{ feeform.fee.8.tag }}
+                                            <label for="{{feeform.fee.8.id_for_label}}">Anderer</label>
+                                        </div>
+                                    </div>
+                                    <div id="cmember_other">
+                                        <input class="form-control" id="fee_company_other" name="fee_company_other" placeholder="min. ???€" type="number">
+                                    </div>
+                                </div>
+                            </div>
                         <hr></hr>
+                        <div style="display: none">{{ form.fee }}</div>
                         <button id="submit" class="btn btn-info btn-block" type="submit" value="Register" disabled=""><strong>Weiter</strong></button>
                     </div>
                     </form>
@@ -218,20 +240,29 @@
         $(function () {
             $('#smember').hide();
             $('#jmember').hide();
+            $('#cmember').hide();
             $('.memberstatus').change(function(){
                 selected = $('input[name=memberstatus]:checked').val();
                 if (selected == 'member'){
                     $('#smember').hide();
                     $('#jmember').hide();
+                    $('#cmember').hide();
                     $('#member').show();
                 } else if (selected == 'sustaining_member') {
                     $('#member').hide();
                     $('#jmember').hide();
+                    $('#cmember').hide();
                     $('#smember').show();
                 } else if (selected == 'junior_member') {
                     $('#member').hide();
                     $('#smember').hide();
+                    $('#cmember').hide();
                     $('#jmember').show();
+                } else if (selected == 'company_member') {
+                    $('#member').hide();
+                    $('#smember').hide();
+                    $('#jmember').hide();
+                    $('#cmember').show();
                 }
                 });
             });
@@ -239,50 +270,65 @@
             $('#member_other').hide();
             $('#smember_other').hide();
             $('#jmember_other').hide();
-            $('#{{form.fee.0.id_for_label}}').click(function(){
-                $('#jmember_other').hide();
+            $('#cmember_other').hide();
+            $('#{{feeform.fee.0.id_for_label}}').click(function(){
                 $('#member_other').hide();
+                value = $(this).val();
+                $('#id_fee').attr('value', value);
             });  
-            $('#{{form.fee.1.id_for_label}}').click(function(){
+            $('#{{feeform.fee.1.id_for_label}}').click(function(){
                 $('#member_other').hide();
-                $('#jmember_other').hide();
+                value = $(this).val();
+                $('#id_fee').attr('value', value);
             });  
-            $('#{{form.fee.2.id_for_label}}').click(function(){
-                $('#jmember_other').hide();
+            $('#{{feeform.fee.2.id_for_label}}').click(function(){
                 $('#smember_other').hide();
+                value = $(this).val();
+                $('#id_fee').attr('value', value);
             })
-            $('#{{form.fee.3.id_for_label}}').click(function(){
-                $('#jmember_other').hide();
-                $('#smember_other').hide();
+            $('#{{feeform.fee.3.id_for_label}}').click(function(){
                 $('#member_other').show();
+                $('#id_fee').attr('value', '');
             });
-            $('#{{form.fee.4.id_for_label}}').click(function(){
-                $('#jmember_other').hide();
-                $('#member_other').hide();
+            $('#{{feeform.fee.4.id_for_label}}').click(function(){
                 $('#smember_other').show();
+                $('#id_fee').attr('value', '');
             });
-            $('#{{form.fee.5.id_for_label}}').click(function(){
+            $('#{{feeform.fee.5.id_for_label}}').click(function(){
                 $('#jmember_other').hide();
-                $('#smember_other').hide();
+                value = $(this).val();
+                $('#id_fee').attr('value', value);
             });
-            $('#{{form.fee.6.id_for_label}}').click(function(){
-                $('#member_other').hide();
-                $('#smember_other').hide();
+            $('#{{feeform.fee.6.id_for_label}}').click(function(){
                 $('#jmember_other').show();
+                $('#id_fee').attr('value', '');
+            });
+            $('#{{feeform.fee.7.id_for_label}}').click(function(){
+                $('#cmember_other').hide();
+                value = $(this).val();
+                $('#id_fee').attr('value', value);
+            });
+            $('#{{feeform.fee.8.id_for_label}}').click(function(){
+                $('#cmember_other').show();
+                $('#id_fee').attr('value', '');
             });
         });
         $(function (){
             $('#fee_other').change(function() {
                 value = $('#fee_other').val();
-                $('#{{form.fee.3.id_for_label}}').val(value);
+                $('#id_fee').attr('value', value);
             });
             $('#fee_sustain_other').change(function() {
                 value = $('#fee_sustain_other').val();
-                $('#{{form.fee.4.id_for_label}}').val(value);
+                $('#id_fee').attr('value', value);
             });
             $('#fee_junior_other').change(function() {
                 value = $('#fee_junior_other').val();
-                $('#{{form.fee.6.id_for_label}}').val(value);
+                $('#id_fee').attr('value', value);
+            });
+            $('#fee_company_other').change(function() {
+                value = $('#fee_company_other').val();
+                $('#id_fee').attr('value', value);
             });
         });
 

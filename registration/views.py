@@ -64,8 +64,8 @@ def register(request):
             return render(request, 'register_preview.html', {'preview_data':preview_data, 'form':form, 'memberform':memberform})
     
     form = MemberForm()
-    
-    return render(request, 'register_page.html', {'form':form})
+    feeform = FeeForm()
+    return render(request, 'register_page.html', {'form':form, 'feeform':feeform})
     
 def preview(request):
     '''Second register page. Show a preview of inputed data and to accept rules'''
