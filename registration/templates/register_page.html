@@ -11,7 +11,7 @@
                     <div class="panel-body">
                         <h4>Anmelden als:</h4>
                         <div class="row">
-                            <div class="col-xs-12 col-sm-6 col-md-6">
+                            <div class="col-xs-12 col-sm-6 col-md-3">
                                 <div class="funkyradio">
                                     <div class="funkyradio-success">
                                         {{ form.memberstatus.1.tag }}
@@ -19,11 +19,27 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xs-12 col-sm-6 col-md-6">
+                            <div class="col-xs-12 col-sm-6 col-md-3">
                                 <div class="funkyradio">
                                     <div class="funkyradio-success">
                                         {{ form.memberstatus.2.tag }}
                                         <label for="{{form.memberstatus.2.id_for_label}}"><strong>{{form.memberstatus.2.choice_label}}</strong></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-3">
+                                <div class="funkyradio">
+                                    <div class="funkyradio-success">
+                                        {{ form.memberstatus.3.tag }}
+                                        <label for="{{form.memberstatus.3.id_for_label}}"><strong>{{form.memberstatus.3.choice_label}}</strong></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-3">
+                                <div class="funkyradio">
+                                    <div class="funkyradio-success">
+                                        {{ form.memberstatus.4.tag }}
+                                        <label for="{{form.memberstatus.4.id_for_label}}"><strong>{{form.memberstatus.4.choice_label}}</strong></label>
                                     </div>
                                 </div>
                             </div>
@@ -154,6 +170,27 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row" id="jmember">
+                                <div class="col-xs-12 col-sm-6 col-md-6">
+                                    <div class="funkyradio">
+                                        <div class="funkyradio-success">
+                                            {{ form.fee.5.tag }}
+                                            <label for="{{form.fee.5.id_for_label}}">5€</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-6">
+                                    <div class="funkyradio">
+                                        <div class="funkyradio-success">
+                                            {{ form.fee.6.tag }}
+                                            <label for="{{form.fee.6.id_for_label}}">Anderer</label>
+                                        </div>
+                                    </div>
+                                    <div id="jmember_other">
+                                        <input class="form-control" id="fee_junior_other" name="fee_junior_other" placeholder="min. ???€" type="number">
+                                    </div>
+                                </div>
+                            </div>
                         <hr></hr>
                         <button id="submit" class="btn btn-info btn-block" type="submit" value="Register" disabled=""><strong>Weiter</strong></button>
                     </div>
@@ -180,34 +217,58 @@
         });
         $(function () {
             $('#smember').hide();
+            $('#jmember').hide();
             $('.memberstatus').change(function(){
-                 selected = $('input[name=memberstatus]:checked').val();
-                 if (selected == 'member'){
+                selected = $('input[name=memberstatus]:checked').val();
+                if (selected == 'member'){
                     $('#smember').hide();
+                    $('#jmember').hide();
                     $('#member').show();
-                 } else if (selected == 'sustaining_member') {
+                } else if (selected == 'sustaining_member') {
                     $('#member').hide();
+                    $('#jmember').hide();
                     $('#smember').show();
-                 } 
+                } else if (selected == 'junior_member') {
+                    $('#member').hide();
+                    $('#smember').hide();
+                    $('#jmember').show();
+                }
                 });
             });
         $(function () {
             $('#member_other').hide();
             $('#smember_other').hide();
-            $('#{{form.fee.3.id_for_label}}').click(function(){
-                $('#member_other').show();
-            });
+            $('#jmember_other').hide();
+            $('#{{form.fee.0.id_for_label}}').click(function(){
+                $('#jmember_other').hide();
+                $('#member_other').hide();
+            });  
             $('#{{form.fee.1.id_for_label}}').click(function(){
                 $('#member_other').hide();
-            });
-            $('#{{form.fee.0.id_for_label}}').click(function(){
-                $('#member_other').hide();
-            });
+                $('#jmember_other').hide();
+            });  
             $('#{{form.fee.2.id_for_label}}').click(function(){
+                $('#jmember_other').hide();
                 $('#smember_other').hide();
+            })
+            $('#{{form.fee.3.id_for_label}}').click(function(){
+                $('#jmember_other').hide();
+                $('#smember_other').hide();
+                $('#member_other').show();
             });
             $('#{{form.fee.4.id_for_label}}').click(function(){
+                $('#jmember_other').hide();
+                $('#member_other').hide();
                 $('#smember_other').show();
+            });
+            $('#{{form.fee.5.id_for_label}}').click(function(){
+                $('#jmember_other').hide();
+                $('#smember_other').hide();
+            });
+            $('#{{form.fee.6.id_for_label}}').click(function(){
+                $('#member_other').hide();
+                $('#smember_other').hide();
+                $('#jmember_other').show();
             });
         });
         $(function (){
@@ -218,6 +279,10 @@
             $('#fee_sustain_other').change(function() {
                 value = $('#fee_sustain_other').val();
                 $('#{{form.fee.4.id_for_label}}').val(value);
+            });
+            $('#fee_junior_other').change(function() {
+                value = $('#fee_junior_other').val();
+                $('#{{form.fee.6.id_for_label}}').val(value);
             });
         });
 
