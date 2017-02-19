@@ -48,7 +48,7 @@ def register(request):
             #encapsulate to preview on next page
             preview_data = {
                 'name':name,
-                'sirname':sirname,
+                'surname':surname,
                 'street':street,
                 'streetnumber':streetnumber,
                 'postcode':postcode,
@@ -65,8 +65,8 @@ def register(request):
             return render(request, 'register_preview.html', {'preview_data':preview_data, 'form':form, 'memberform':memberform})
     
     form = MemberForm()
-    
-    return render(request, 'register_page.html', {'form':form})
+    feeform = FeeForm()
+    return render(request, 'register_page.html', {'form':form, 'feeform':feeform})
     
 def preview(request):
     '''Second register page. Show a preview of inputed data and to accept rules'''
@@ -106,36 +106,30 @@ def preview(request):
                     member.rules_agree = form.cleaned_data['rules_agree']
                     member.privacy_agree = form.cleaned_data['privacy_agree']
                     member.save()
-                    return render(request, 'register_status.html', {'status':'success'})
-                    
-                    try:
-                        send_mail(
-                            'Eigenbaukombinat Online Registrierung',
-                            'Deine Registrierung für das Eigenbaukombinat ist erfolgreich eingegangen. Bitte habe noch etwas Geduld bis diese bestätigt wurde.',
-                            SENDER_MAIL,
-                            [member.email],
-                            fail_silently=False,
-                            )
-                        send_mail(
-                            'Eigenbaukombinat Online Registrierung',
-                            'Ein neues Mitglied hat sich registriert',
-                            SENDER_MAIL,
-                            [MAIL],
-                            fail_silently=False,
-                            )
-                    except:
-                        return render(request, 'register_status.html',{'status':'notsend'})
+                                    
+                  #  try:
+                  #      send_mail(
+                  #          'Eigenbaukombinat Online Registrierung',
+                  #          'Deine Registrierung für das Eigenbaukombinat ist erfolgreich eingegangen. Bitte habe noch etwas Geduld bis diese bestätigt wurde.',
+                  #          SENDER_MAIL,
+                  #          [member.email],
+                  #          fail_silently=False,
+                  #          )
+                  #      send_mail(
+                  #          'Eigenbaukombinat Online Registrierung',
+                  #          'Ein neues Mitglied hat sich registriert',
+                  #          SENDER_MAIL,
+                  #          [MAIL],
+                  #          fail_silently=False,
+                  #          )
+                  #  except:
+                  #      return render(request, 'register_status.html',{'status':'notsend'})
                     
                     return render(request, 'register_status.html',{'status':'success'})
                 else:
                     return render(request, 'register_status.html', {'status':'registered'})
             else:
-                return render(request, 'register_preview.html', {'form':form, 'preview_data':preview_data, 'status':'failed'})
+                return render(request, 'register_preview.html', {'form':form, 'memberform':memberform, 'status':'failed'})
     
     form = AgreementForm()
     return render(request, 'register_preview.html', {'form':form})
-
-def status(request):
-    '''last page to show successfull registration and download registration data'''
-    
-    return render(request, 'register_status.html', {'status':'success'})

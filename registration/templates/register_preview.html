@@ -152,10 +152,20 @@
                             </div>
                             <div style="display: none">{{ memberform.as_p }}</div>
                         <hr></hr>
-                        <button class="btn btn-info btn-block" type="submit" value="Register"><strong>Jetzt kostenpflichtig Mitglied werden</strong></button>
+                        <button id="submit" class="btn btn-info btn-block" type="submit" value="Register" disabled=""><strong>Jetzt kostenpflichtig Mitglied werden</strong></button>
                         </form>
                     </div>
                 </div>
             </div>
-            
+            <script>
+            $('#preview').click(function() {
+               if($('#id_rules_agree').is(':checked') && 
+               $('#id_sepa_agree').is(':checked') && 
+               $('#id_privacy_agree').is(':checked')) {
+                    $('#submit').prop('disabled', false); 
+                }else{
+                    $('#submit').prop('disabled', true);
+                };
+            });
+            </script>
             {% endblock %}

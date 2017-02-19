@@ -35,7 +35,7 @@ class MemberForm(forms.ModelForm):
             'email': forms.EmailInput(attrs={'class':'form-control input-sm', 'placeholder':'Emailadresse'}),
             'phonenumber': forms.TextInput(attrs={'class':'form-control input-sm', 'placeholder':'Telefonnummer'}),
             'birthdate': forms.DateInput(attrs={'class':'form-control input-sm', 'placeholder':'Geburtstag'}, format='%d.%m.%Y'),
-            'fee': forms.RadioSelect(attrs={}, choices=FEE),
+            'fee': forms.NumberInput(attrs={'value':'12'}),
             'iban': forms.TextInput(attrs={'class':'form-control input-sm', 'placeholder':'IBAN', 'data-validation':'iban'}),
             'memberstatus': forms.RadioSelect(attrs={'class':'memberstatus'}),
         }
@@ -54,4 +54,14 @@ class AgreementForm(forms.ModelForm):
             'rules_agree': forms.CheckboxInput(attrs={}),
             'privacy_agree': forms.CheckboxInput(attrs={}),
         }
-    
+
+class FeeForm(forms.ModelForm):
+        
+        class Meta:
+            model = Member
+            fields = [
+                'fee',
+                ]
+            widgets = {
+                'fee': forms.RadioSelect(attrs={}, choices=FEE),
+            }

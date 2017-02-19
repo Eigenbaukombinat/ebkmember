@@ -18,7 +18,7 @@ class Member(models.Model):
     email = models.EmailField()
     phonenumber = models.CharField(max_length = 25)
     birthdate = models.DateField()
-    entrydate = models.DateField()
+    entrydate = models.DateField(null=True)
     fee = models.FloatField()
     iban = IBANField(include_countries=IBAN_SEPA_COUNTRIES)
     memberstatus = models.CharField(max_length = 25, choices=MEMBERSTATUS)
