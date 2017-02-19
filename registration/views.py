@@ -1,3 +1,4 @@
+#coding:utf8
 from django.shortcuts import render
 from django.core.mail import send_mail, BadHeaderError
 from localflavor.generic.checksums import luhn
@@ -17,10 +18,10 @@ from .forms import *
 
 
 ## mail to send message if someone signed up
-MAIL = 'example@example.com'
+MAIL = 'vorstand@eigenbaukombinat.de'
 
 ## mail address shown as sender for mail
-SENDER_MAIL = 'sender@example.com'
+SENDER_MAIL = 'vorstand@eigenbaukombinat.de'
 
 def register(request):
     '''First register page to input personal data'''
@@ -75,7 +76,6 @@ def preview(request):
         form = AgreementForm(request.POST)
         memberform = MemberForm(request.POST)
         if form.is_valid() and memberform.is_valid():
-            import pdb; pdb.set_trace()
             #check if rules are accepted if not show message
             if form.cleaned_data['sepa_agree'] == True and \
                 form.cleaned_data['rules_agree'] == True and \

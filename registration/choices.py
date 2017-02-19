@@ -1,4 +1,4 @@
-
+#coding:utf8
 SEX = (
     ('male','Mann'),
     ('female', 'Frau'),
