@@ -8,7 +8,7 @@ SEX = (
 MEMBERSTATUS = (
     ('member','Mitglied'),
     ('sustaining_member', 'Fördermitglied'),
-    ('junior_member', 'Juniormitgliedschaft'),
+    ('junior_member', 'Juniormitglied'),
     )
 
 STATUS = (
@@ -22,7 +22,7 @@ FEE = (
     (18, 'reduced'),
     (5,'sustain_min'),
     (0, 'other'),
-    (1, 'sustain_other'),
-    (18, 'junior'),
-    (1, 'junior_other'),
-    )
+    (5, 'sustain_other'),
+    (8, 'junior'),
+    (8, 'junior_other'),
+)
