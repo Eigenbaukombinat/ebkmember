@@ -11,7 +11,7 @@
                     <div class="panel-body">
                         <h4>Anmelden als:</h4>
                         <div class="row">
-                            <div class="col-xs-12 col-sm-6 col-md-3">
+                            <div class="col-xs-12 col-sm-6 col-md-4">
                                 <div class="funkyradio">
                                     <div class="funkyradio-success">
                                         {{ form.memberstatus.1.tag }}
@@ -19,7 +19,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xs-12 col-sm-6 col-md-3">
+                            <div class="col-xs-12 col-sm-6 col-md-4">
                                 <div class="funkyradio">
                                     <div class="funkyradio-success">
                                         {{ form.memberstatus.2.tag }}
@@ -27,19 +27,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xs-12 col-sm-6 col-md-3">
+                            <div class="col-xs-12 col-sm-6 col-md-4">
                                 <div class="funkyradio">
                                     <div class="funkyradio-success">
                                         {{ form.memberstatus.3.tag }}
                                         <label for="{{form.memberstatus.3.id_for_label}}"><strong>{{form.memberstatus.3.choice_label}}</strong></label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-sm-6 col-md-3">
-                                <div class="funkyradio">
-                                    <div class="funkyradio-success">
-                                        {{ form.memberstatus.4.tag }}
-                                        <label for="{{form.memberstatus.4.id_for_label}}"><strong>{{form.memberstatus.4.choice_label}}</strong></label>
                                     </div>
                                 </div>
                             </div>
@@ -191,27 +183,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row" id="cmember">
-                                <div class="col-xs-12 col-sm-6 col-md-6">
-                                    <div class="funkyradio">
-                                        <div class="funkyradio-success">
-                                            {{ feeform.fee.7.tag }}
-                                            <label for="{{feeform.fee.7.id_for_label}}">12341€</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-12 col-sm-6 col-md-6">
-                                    <div class="funkyradio">
-                                        <div class="funkyradio-success">
-                                            {{ feeform.fee.8.tag }}
-                                            <label for="{{feeform.fee.8.id_for_label}}">Anderer</label>
-                                        </div>
-                                    </div>
-                                    <div id="cmember_other">
-                                        <input class="form-control" id="fee_company_other" name="fee_company_other" placeholder="min. ???€" type="number">
-                                    </div>
-                                </div>
-                            </div>
                         <hr></hr>
                         <div style="display: none">{{ form.fee }}</div>
                         <button id="submit" class="btn btn-info btn-block" type="submit" value="Register" disabled=""><strong>Weiter</strong></button>
@@ -240,29 +211,20 @@
         $(function () {
             $('#smember').hide();
             $('#jmember').hide();
-            $('#cmember').hide();
             $('.memberstatus').change(function(){
                 selected = $('input[name=memberstatus]:checked').val();
                 if (selected == 'member'){
                     $('#smember').hide();
                     $('#jmember').hide();
-                    $('#cmember').hide();
                     $('#member').show();
                 } else if (selected == 'sustaining_member') {
                     $('#member').hide();
                     $('#jmember').hide();
-                    $('#cmember').hide();
                     $('#smember').show();
                 } else if (selected == 'junior_member') {
                     $('#member').hide();
                     $('#smember').hide();
-                    $('#cmember').hide();
                     $('#jmember').show();
-                } else if (selected == 'company_member') {
-                    $('#member').hide();
-                    $('#smember').hide();
-                    $('#jmember').hide();
-                    $('#cmember').show();
                 }
                 });
             });
@@ -270,7 +232,6 @@
             $('#member_other').hide();
             $('#smember_other').hide();
             $('#jmember_other').hide();
-            $('#cmember_other').hide();
             $('#{{feeform.fee.0.id_for_label}}').click(function(){
                 $('#member_other').hide();
                 value = $(this).val();
@@ -324,10 +285,6 @@
             });
             $('#fee_junior_other').change(function() {
                 value = $('#fee_junior_other').val();
-                $('#id_fee').attr('value', value);
-            });
-            $('#fee_company_other').change(function() {
-                value = $('#fee_company_other').val();
                 $('#id_fee').attr('value', value);
             });
         });
