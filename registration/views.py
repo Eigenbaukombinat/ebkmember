@@ -42,7 +42,6 @@ def register(request):
             birthdate = memberform.cleaned_data['birthdate']
             birthdate = birthdate.strftime('%d/%m/%Y')   
             fee = memberform.cleaned_data['fee']
-            iban = memberform.cleaned_data['iban']
             memberstatus = memberform.cleaned_data['memberstatus']
             
             #encapsulate to preview on next page
@@ -58,7 +57,6 @@ def register(request):
                 'phonenumber':phonenumber,
                 'birthdate':birthdate,
                 'fee':fee,
-                'iban':iban,
                 'memberstatus':memberstatus,
             }
             form = AgreementForm()
@@ -79,7 +77,9 @@ def preview(request):
             #check if rules are accepted if not show message
             if form.cleaned_data['sepa_agree'] == True and \
                 form.cleaned_data['rules_agree'] == True and \
-                form.cleaned_data['privacy_agree'] == True:
+                form.cleaned_data['privacy_agree'] == True and \
+                form.cleaned_data['iban']:
+
                 #check if member with this name already exists if not proceed
                 if Member.objects.filter(
                                             name=memberform.cleaned_data['name'], 
@@ -99,9 +99,9 @@ def preview(request):
                     member.phonenumber = memberform.cleaned_data['phonenumber']
                     member.birthdate = memberform.cleaned_data['birthdate']
                     member.fee = memberform.cleaned_data['fee']
-                    member.iban = memberform.cleaned_data['iban']
                     member.memberstatus = memberform.cleaned_data['memberstatus']
                     member.status = 'pending'
+                    member.iban = form.cleaned_data['iban']
                     member.sepa_agree = form.cleaned_data['sepa_agree']
                     member.rules_agree = form.cleaned_data['rules_agree']
                     member.privacy_agree = form.cleaned_data['privacy_agree']

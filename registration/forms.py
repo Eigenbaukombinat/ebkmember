@@ -21,7 +21,6 @@ class MemberForm(forms.ModelForm):
             'phonenumber',
             'birthdate',
             'fee',
-            'iban',
             'memberstatus',
             ]
         widgets = {
@@ -36,7 +35,6 @@ class MemberForm(forms.ModelForm):
             'phonenumber': forms.TextInput(attrs={'class':'form-control input-sm', 'placeholder':'Telefonnummer'}),
             'birthdate': forms.DateInput(attrs={'class':'form-control input-sm', 'placeholder':'Geburtstag'}, format='%d.%m.%Y'),
             'fee': forms.NumberInput(attrs={'value':'12'}),
-            'iban': forms.TextInput(attrs={'class':'form-control input-sm', 'placeholder':'IBAN', 'data-validation':'iban'}),
             'memberstatus': forms.RadioSelect(attrs={'class':'memberstatus'}),
         }
         
@@ -48,11 +46,15 @@ class AgreementForm(forms.ModelForm):
             'sepa_agree',
             'rules_agree',
             'privacy_agree',
+            'iban',
+
             ]
         widgets = {
             'sepa_agree': forms.CheckboxInput(attrs={}),
             'rules_agree': forms.CheckboxInput(attrs={}),
             'privacy_agree': forms.CheckboxInput(attrs={}),
+            'iban': forms.TextInput(attrs={'class':'form-control input-sm', 'placeholder':'Bitte hier die IBAN ihres Kontos eingeben von der die Beiträge abgebucht werden sollen.', 'data-validation':'iban'}),
+
         }
 
 class FeeForm(forms.ModelForm):
