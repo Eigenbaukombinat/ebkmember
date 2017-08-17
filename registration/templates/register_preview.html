@@ -12,30 +12,15 @@
                         <div class="row">
                             {% if preview_data.memberstatus == 'member' %}
                             <div class="col-xs-12 col-sm-6 col-md-4">
-                                <div class="funkyradio">
-                                    <div class="funkyradio-success">
-                                        <input class="memberstatus" name="memberstatus" type="radio" value="member" id="id_memberstatus_1" selected="selected">
-                                        <label for="id_memberstatus_1"><strong>Mitglied</strong></label>
-                                    </div>
-                                </div>
+                                <strong>Mitglied</strong>
                             </div>
                             {% elif preview_data.memberstatus == 'sustaining_member' %}
                             <div class="col-xs-12 col-sm-6 col-md-4">
-                                <div class="funkyradio">
-                                    <div class="funkyradio-success">
-                                        <input class="memberstatus" name="memberstatus" type="radio" value="member" id="id_memberstatus_2" selected="selected">
-                                        <label for="id_memberstatus_2"><strong>Fördermitglied</strong></label>
-                                    </div>
-                                </div>
+                                <strong>Fördermitglied</strong>
                             </div>
                             {% elif preview_data.memberstatus == 'junior_member' %}
                             <div class="col-xs-12 col-sm-6 col-md-4">
-                                <div class="funkyradio">
-                                    <div class="funkyradio-success">
-                                        <input class="memberstatus" name="memberstatus" type="radio" value="member" id="id_memberstatus_3" selected="selected">
-                                        <label for="id_memberstatus_3"><strong>Junior Mitglied</strong></label>
-                                    </div>
-                                </div>
+                                <strong>Junior Mitglied</strong>
                             </div>
                             {% endif %}
                         </div>
@@ -79,7 +64,7 @@
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <p>
-                                    <strong>Telefon:</strong> {{ preview_data.phonenumber }}
+                                    <strong>Telefon:</strong> {{ preview_data.phonenumber }}<br/>
                                     <strong>Geburtsdatum:</strong> {{ preview_data.birthdate }}
                                 </p>
                             </div>
@@ -103,7 +88,7 @@
                                     <div class="box red">
                                         <p>
                                             <span class="fa fa-exclamation-triangle"></span>
-                                            Bitte akzeptieren Sie die nachfolgenden Bedingungen um die Registrierung erfolgreich abzuschließen.
+                                            Bitte akzeptiere die nachfolgenden Bedingungen um die Registrierung erfolgreich abzuschließen.
                                         <p>
                                     </div>
                                 </div>
@@ -122,7 +107,7 @@
                                     <div class="funkyradio">
                                         <div class="funkyradio-success">
                                             {{ form.privacy_agree }}
-                                            <label for="{{form.privacy_agree.id_for_label}}"><strong>Ich akzeptiere die Datenschutzbedingungen</strong></label>
+                                            <label for="{{form.privacy_agree.id_for_label}}"><strong>Ich akzeptiere die Datenschutzbedingungen:</strong></label>
                                         </div>
                                     </div>
                                 </div>
@@ -136,9 +121,9 @@
                                     </p>
                                 </div>
                             </div>
-                        <h4>SEPA-Mandat</h4>
                             <div class="row">
                                 <div class="col-xs-12 col-sm-12 col-md-12">
+                                <h4>SEPA-Mandat</h4>
                                     <div class="funkyradio">
                                         <div class="funkyradio-success">
                                             {{ form.sepa_agree }}
