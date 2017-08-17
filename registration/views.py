@@ -28,7 +28,6 @@ def register(request):
     
     if request.method == 'POST':
         memberform = MemberForm(request.POST)
-        #import pdb; pdb.set_trace()
         if memberform.is_valid():
             name = memberform.cleaned_data['name']
             surname = memberform.cleaned_data['surname']
@@ -40,10 +39,8 @@ def register(request):
             email = memberform.cleaned_data['email']
             phonenumber = memberform.cleaned_data['phonenumber']
             birthdate = memberform.cleaned_data['birthdate']
-            birthdate = birthdate.strftime('%d/%m/%Y')   
             fee = memberform.cleaned_data['fee']
             memberstatus = memberform.cleaned_data['memberstatus']
-            
             #encapsulate to preview on next page
             preview_data = {
                 'name':name,
@@ -56,7 +53,7 @@ def register(request):
                 'email':email,
                 'phonenumber':phonenumber,
                 'birthdate':birthdate,
-                'fee':fee,
+                'fee': '%.2f' % fee,
                 'memberstatus':memberstatus,
             }
             form = AgreementForm()

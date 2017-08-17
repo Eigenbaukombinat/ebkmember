@@ -33,7 +33,7 @@ class MemberForm(forms.ModelForm):
             'country': CountrySelectWidget(attrs={'class':'form-control input-sm', 'placeholder':'Land'}),
             'email': forms.EmailInput(attrs={'class':'form-control input-sm', 'placeholder':'Emailadresse'}),
             'phonenumber': forms.TextInput(attrs={'class':'form-control input-sm', 'placeholder':'Telefonnummer'}),
-            'birthdate': forms.DateInput(attrs={'class':'form-control input-sm', 'placeholder':'Geburtstag'}, format='%d.%m.%Y'),
+            'birthdate': forms.TextInput(attrs={'class':'form-control input-sm', 'placeholder':'Geburtstag'}),
             'fee': forms.NumberInput(attrs={'value':'12'}),
             'memberstatus': forms.RadioSelect(attrs={'class':'memberstatus'}),
         }

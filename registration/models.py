@@ -20,7 +20,7 @@ class Member(models.Model):
     country = CountryField(blank_label='Select Country')
     email = models.EmailField()
     phonenumber = models.CharField(max_length = 25)
-    birthdate = models.DateField()
+    birthdate = models.CharField(max_length=30)
     entrydate = models.DateField(null=True)
     fee = models.FloatField()
     iban = IBANField(include_countries=IBAN_SEPA_COUNTRIES)
