@@ -14,7 +14,7 @@
                             <div class="col-xs-12 col-sm-6 col-md-4">
                                 <div class="funkyradio">
                                     <div class="funkyradio-success">
-                                        <input class="memberstatus" name="memberstatus" type="radio" value="member" id="id_memberstatus_1">
+                                        <input class="memberstatus" name="memberstatus" type="radio" value="member" id="id_memberstatus_1" selected="selected">
                                         <label for="id_memberstatus_1"><strong>Mitglied</strong></label>
                                     </div>
                                 </div>
@@ -23,7 +23,7 @@
                             <div class="col-xs-12 col-sm-6 col-md-4">
                                 <div class="funkyradio">
                                     <div class="funkyradio-success">
-                                        <input class="memberstatus" name="memberstatus" type="radio" value="member" id="id_memberstatus_2">
+                                        <input class="memberstatus" name="memberstatus" type="radio" value="member" id="id_memberstatus_2" selected="selected">
                                         <label for="id_memberstatus_2"><strong>Fördermitglied</strong></label>
                                     </div>
                                 </div>
@@ -32,7 +32,7 @@
                             <div class="col-xs-12 col-sm-6 col-md-4">
                                 <div class="funkyradio">
                                     <div class="funkyradio-success">
-                                        <input class="memberstatus" name="memberstatus" type="radio" value="member" id="id_memberstatus_3">
+                                        <input class="memberstatus" name="memberstatus" type="radio" value="member" id="id_memberstatus_3" selected="selected">
                                         <label for="id_memberstatus_3"><strong>Junior Mitglied</strong></label>
                                     </div>
                                 </div>
@@ -43,7 +43,7 @@
                         </div>
                         
                         <div class="col-xs-12 col-sm-12 col-md-6">
-                        <h4>Ihre persönlichen Daten:</h4>
+                        <h4>Deine persönlichen Daten:</h4>
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <p>
@@ -71,16 +71,16 @@
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <p>
-                                    {{ preview_data.country }}
-                                    {{ preview_data.email }}
+                                    <strong>Land:</strong> {{ preview_data.country }}<br/>
+                                    <strong>E-Mail:</strong> {{ preview_data.email }}
                                 </p>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <p>
-                                    {{ preview_data.phonenumber }}
-                                    {{ preview_data.birthdate }}
+                                    <strong>Telefon:</strong> {{ preview_data.phonenumber }}
+                                    <strong>Geburtsdatum:</strong> {{ preview_data.birthdate }}
                                 </p>
                             </div>
                         </div>
@@ -94,8 +94,9 @@
                                 </p>
                             </div>
                         </div>
-                        </div>
-                        <form action="{% url 'preview' %}" method="POST" class="register-form" id="preview">{% csrf_token %}
+
+                    </div>
+                    <form action="{% url 'preview' %}" method="POST" class="register-form" id="preview">{% csrf_token %}
                         <div class="row">
                             {% if status == 'failed' %}
                                 <div class="col-xs-12 col-sm-12 col-md-12">
