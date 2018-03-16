@@ -3,6 +3,7 @@
 *.pyc
 *~
 __pycache__
+collmex.ini
 db.sqlite3
 /static
 .DS_Store

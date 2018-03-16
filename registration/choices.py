@@ -15,6 +15,7 @@ STATUS = (
     ('pending','pending'),
     ('approved','approved'),
     ('rejected','rejected'),
+    ('exported','exported'),
     )
 
 FEE = (
