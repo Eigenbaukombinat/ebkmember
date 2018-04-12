@@ -7,3 +7,8 @@ collmex.ini
 db.sqlite3
 /static
 .DS_Store
+mailconfig.py
+bin
+include
+lib
+share

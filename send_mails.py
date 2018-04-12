@@ -1,0 +1,45 @@
+import sqlite3
+import smtplib
+from email.message import EmailMessage
+import sys
+from mailconfig import SERVER, PORT, USER, PW, FROM, TO, URL
+
+
+def db(func):
+    def func_wrapper(*args, **kw):
+        db = sqlite3.connect('db.sqlite3')
+        c = db.cursor()
+        res = func(c, *args, **kw)
+        db.commit()
+        db.close()
+        return res
+    return func_wrapper
+
+
+@db
+def get_new_registrations(c):
+    c.execute("SELECT * FROM registration_member where status='pending'");
+    return c.fetchall()
+
+
+new_regs = get_new_registrations()
+if not new_regs:
+    sys.exit(0)
+
+msg = EmailMessage()
+msg.set_content("""Es gibt {} neue Mitgliedsanträge - bitte verifizieren!
+
+{}
+
+Anträge mit dem Status "pending" anklicken, das "Entrydate" (=Eintrittsdatum) setzen und den Status auf "approved" setzen.
+""".format(len(new_regs), URL))
+
+msg['Subject'] = 'Neue Online-Mitgliedsanträge'
+msg['From'] = FROM
+msg['To'] = TO
+
+s = smtplib.SMTP(SERVER, PORT)
+if (USER and PW):
+    s.login(USER, PW)
+s.send_message(msg)
+s.quit()

@@ -1,0 +1,7 @@
+SERVER = 'localhost'
+PORT = 25
+USER = ''
+PW = ''
+FROM = 'me'
+TO = 'you'
+URL = 'https://mitgliedadpp/bla'
