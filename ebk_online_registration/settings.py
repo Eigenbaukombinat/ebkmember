@@ -55,7 +55,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECRET_KEY = '=+v)38%sihkn)g(wdnv1y1m@+@*@(ldrnbiw$v$e%qgdedw^3%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True 
+DEBUG = False 
 
 ALLOWED_HOSTS = ['localhost', 'mitgliedwerden2.eigenbaukombinat.de', 'mitgliedwerden.eigenbaukombinat.de']
 USE_X_FORWARDED_HOST = True
