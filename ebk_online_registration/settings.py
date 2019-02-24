@@ -57,7 +57,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False 
 
-ALLOWED_HOSTS = ['localhost', 'mitgliedwerden2.eigenbaukombinat.de', 'mitgliedwerden.eigenbaukombinat.de']
+ALLOWED_HOSTS = ['localhost', 'mitgliedwerden.eigenbaukombinat.de']
 USE_X_FORWARDED_HOST = True
 
 
