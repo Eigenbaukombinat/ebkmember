@@ -2,7 +2,7 @@ import sqlite3
 import smtplib
 from email.message import EmailMessage
 import sys
-from mailconfig import SERVER, PORT, USER, PW, FROM, TO, URL
+from mailconfig import SERVER, PORT, USER, PW, FROM, TO, URL, CC
 
 
 def db(func):
@@ -27,16 +27,19 @@ if not new_regs:
     sys.exit(0)
 
 msg = EmailMessage()
-msg.set_content("""Es gibt {} neue Mitgliedsanträge - bitte verifizieren!
+msg.set_content("""Es gibt {} neue Mitgliedsanträge.
+
+@Kassenwarte: Bitte verifizieren!
 
 {}
 
-Anträge mit dem Status "pending" anklicken, das "Entrydate" (=Eintrittsdatum) setzen und den Status auf "approved" setzen.
+Anträge mit dem Status "pending" anklicken, Daten prüfen, das "Entrydate" (=Eintrittsdatum -> "heute" falls es keinen besonderen Grund gibt) setzen und den Status auf "approved" setzen. Danach im collmex gucken ob das Mitglied dort richtig ankommt. Falls nicht, nilo nerven.
 """.format(len(new_regs), URL))
 
 msg['Subject'] = 'Neue Online-Mitgliedsanträge'
 msg['From'] = FROM
 msg['To'] = TO
+msg['CC'] = CC
 
 s = smtplib.SMTP(SERVER, PORT)
 if (USER and PW):

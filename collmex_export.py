@@ -58,11 +58,14 @@ status_mapping = {
         'junior_member':  (4, 8)
         }
 
+
 for reg in new_regs:
     #find next free mitgliedsnummer
     mems = api.get_members(include_inactive=True)
+    custs = api.get_customers()
+    custids = [int(cust['Kundennummer']) for cust in custs]
     memids = [int(mem['Mitgliedsnummer']) for mem in mems]
-    new_memid = str(max(memids) + 1)
+    new_memid = str(max(memids + custids) + 1)
     member = Member()
     member['Mitgliedsnummer'] = new_memid
     for regf, cmf in mapping:
@@ -83,7 +86,7 @@ for reg in new_regs:
         pos = 2
         beitrag['Firma'] = 1
         beitrag['Gültig von'] = reg['entrydate']
-        beitrag['Gültig bis'] = datetime.date(entry_dt.year, entry_dt.month, days).isoformat()
+        beitrag['Gültig bis'] = (datetime.date(entry_dt.year, entry_dt.month, days) + datetime.timedelta(days=1)).isoformat()
         beitrag['Intervall'] = 3 #monat 
         beitrag['Nächste Rechnung'] = reg['entrydate']
         prodid, defaultfee = status_mapping[reg['memberstatus']]

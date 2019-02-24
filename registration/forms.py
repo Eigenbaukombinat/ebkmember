@@ -37,7 +37,13 @@ class MemberForm(forms.ModelForm):
             'fee': forms.NumberInput(attrs={'value':'12'}),
             'memberstatus': forms.RadioSelect(attrs={'class':'memberstatus'}),
         }
-        
+    def clean(self):
+        data = self.cleaned_data
+        if data['fee'] < 0:
+            raise forms.ValidationError('Nich bescheissen!!11elf') 
+        if data['memberstatus'] == 'member' and data['fee'] < 18:
+            raise forms.ValidationError('Nich bescheissen!!11elf') 
+
 class AgreementForm(forms.ModelForm):
     
     class Meta:
