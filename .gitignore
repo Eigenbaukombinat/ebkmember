@@ -12,3 +12,4 @@ bin
 include
 lib
 share
+ebk_online_registration/secrets.py
