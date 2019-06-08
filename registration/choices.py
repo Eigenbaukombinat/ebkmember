@@ -16,6 +16,7 @@ STATUS = (
     ('approved','approved'),
     ('rejected','rejected'),
     ('exported','exported'),
+    ('mail_sent','mail_sent'),
     )
 
 FEE = (

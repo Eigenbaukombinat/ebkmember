@@ -28,6 +28,9 @@ def get_new_registrations(c):
 def change_status_to_exported(c, reg_id):
     c.execute("UPDATE registration_member SET status='exported' where id=(?)", (reg_id,))
 
+@db
+def set_membernumber(c, reg_id, membernumber):
+    c.execute("UPDATE registration_member SET membernumber=(?) where id=(?)", (membernumber, reg_id))
 
 new_regs = get_new_registrations()
 if not new_regs:
@@ -68,6 +71,7 @@ for reg in new_regs:
     new_memid = str(max(memids + custids) + 1)
     member = Member()
     member['Mitgliedsnummer'] = new_memid
+    set_membernumber(reg['id'], new_memid)
     for regf, cmf in mapping:
         member[cmf] = reg[regf]
     member['Straße'] = '{} {}'.format(reg['street'], reg['streetnumber'])
