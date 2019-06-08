@@ -86,7 +86,8 @@ for reg in new_regs:
         pos = 2
         beitrag['Firma'] = 1
         beitrag['Gültig von'] = reg['entrydate']
-        beitrag['Gültig bis'] = (datetime.date(entry_dt.year, entry_dt.month, days) + datetime.timedelta(days=1)).isoformat()
+        #beitrag['Gültig bis'] = (datetime.date(entry_dt.year, entry_dt.month, days) + datetime.timedelta(days=1)).isoformat()
+        beitrag['Gültig bis'] = datetime.date(entry_dt.year, entry_dt.month, days).isoformat()
         beitrag['Intervall'] = 3 #monat 
         beitrag['Nächste Rechnung'] = reg['entrydate']
         prodid, defaultfee = status_mapping[reg['memberstatus']]
@@ -94,9 +95,9 @@ for reg in new_regs:
         beitrag['Individueller Preis'] = str(reg['fee'] - (reg['fee'] * factor)).replace('.',',')
         api.create(beitrag)
         valid_from = (datetime.date(entry_dt.year, entry_dt.month, days) + datetime.timedelta(days=1)).isoformat()
-        next_invoice = datetime.date(entry_dt.year, entry_dt.month, days).isoformat() 
-    else:
-        next_invoice = (entry_dt - datetime.timedelta(days=1)).isoformat()
+    #    next_invoice = datetime.date(entry_dt.year, entry_dt.month, days).isoformat() 
+    #else:
+    #    next_invoice = (entry_dt - datetime.timedelta(days=1)).isoformat()
     beitrag2 = MemberProduct()
     beitrag2['Mitglieds-Nr'] = new_memid
     beitrag2['Firma'] = 1
@@ -104,7 +105,7 @@ for reg in new_regs:
     beitrag2['Gültig von'] = valid_from
     beitrag2['Gültig bis'] = '31.12.9999'
     beitrag2['Intervall'] = 3 #monat 
-    beitrag2['Nächste Rechnung'] = next_invoice
+    beitrag2['Nächste Rechnung'] = valid_from 
     prodid, defaultfee = status_mapping[reg['memberstatus']]
     beitrag2['Produkt Nr'] = prodid
     if int(reg['fee']) != defaultfee:
