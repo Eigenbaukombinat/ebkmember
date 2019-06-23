@@ -30,6 +30,6 @@ class Member(models.Model):
     rules_agree = models.BooleanField(default=False, blank=False)
     privacy_agree = models.BooleanField(default=False, blank=False)
     submitted = models.DateTimeField(blank=True, default=datetime.datetime.now)
-    membernumber = models.CharField(max_length = 250, default='')
+    membernumber = models.CharField(max_length = 250, default='', null=True)
     
     
