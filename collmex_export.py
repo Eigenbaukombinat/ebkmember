@@ -83,25 +83,20 @@ for reg in new_regs:
     if entry_dt.day != 1:
         #anteiligen beitrag anlegen
         days = calendar.monthrange(entry_dt.year, entry_dt.month)[1]
-        factor = entry_dt.day / float(days)
         beitrag = MemberProduct()
         beitrag['Mitglieds-Nr'] = new_memid
         beitrag['Pos'] = 1
         pos = 2
         beitrag['Firma'] = 1
         beitrag['Gültig von'] = reg['entrydate']
-        #beitrag['Gültig bis'] = (datetime.date(entry_dt.year, entry_dt.month, days) + datetime.timedelta(days=1)).isoformat()
         beitrag['Gültig bis'] = datetime.date(entry_dt.year, entry_dt.month, days).isoformat()
         beitrag['Intervall'] = 3 #monat 
         beitrag['Nächste Rechnung'] = reg['entrydate']
         prodid, defaultfee = status_mapping[reg['memberstatus']]
         beitrag['Produkt Nr'] = prodid
-        beitrag['Individueller Preis'] = str(reg['fee'] - (reg['fee'] * factor)).replace('.',',')
+        beitrag['Individueller Preis'] = str(reg['fee'] / float(days) * (days - entry_dt.day + 1)).replace('.',',')
         api.create(beitrag)
         valid_from = (datetime.date(entry_dt.year, entry_dt.month, days) + datetime.timedelta(days=1)).isoformat()
-    #    next_invoice = datetime.date(entry_dt.year, entry_dt.month, days).isoformat() 
-    #else:
-    #    next_invoice = (entry_dt - datetime.timedelta(days=1)).isoformat()
     beitrag2 = MemberProduct()
     beitrag2['Mitglieds-Nr'] = new_memid
     beitrag2['Firma'] = 1
