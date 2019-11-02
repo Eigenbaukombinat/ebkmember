@@ -39,7 +39,8 @@ Anträge mit dem Status "pending" anklicken, Daten prüfen, das "Entrydate" (=Ei
 msg['Subject'] = 'Neue Online-Mitgliedsanträge'
 msg['From'] = FROM
 msg['To'] = TO
-msg['CC'] = CC
+if CC:
+    msg['CC'] = CC
 
 s = smtplib.SMTP(SERVER, PORT)
 if (USER and PW):
