@@ -8,9 +8,6 @@ from localflavor.generic.countries.sepa import IBAN_SEPA_COUNTRIES
 
 class Member(models.Model):
     
-    def __str__(self):
-        return u'{} {} ({})'.format(self.name, self.surname, self.status)
-
     name = models.CharField(max_length = 150)
     surname = models.CharField(max_length = 250)
     street = models.CharField(max_length = 250)
