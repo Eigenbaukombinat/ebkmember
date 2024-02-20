@@ -41,7 +41,7 @@ class MemberForm(forms.ModelForm):
         data = self.cleaned_data
         if data['fee'] < 0:
             raise forms.ValidationError('Nich bescheissen!!11elf') 
-        if data['memberstatus'] == 'member' and data['fee'] < 18:
+        if data['memberstatus'] == 'member' and data['fee'] < 23:
             raise forms.ValidationError('Nich bescheissen!!11elf') 
 
 class AgreementForm(forms.ModelForm):

@@ -20,8 +20,8 @@ STATUS = (
     )
 
 FEE = (
-    (24, 'normal'),
-    (18, 'reduced'),
+    (30, 'normal'),
+    (23, 'reduced'),
     (5,'sustain_min'),
     (0, 'other'),
     (5, 'sustain_other'),

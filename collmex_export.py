@@ -56,8 +56,8 @@ mapping = [
 #('memberstatus',''),
 
 status_mapping = {
-        'member': (1, 24),
-        'sustaining_member':  (3, 18),
+        'member': (1, 30),
+        'sustaining_member':  (3, 23),
         'junior_member':  (4, 8)
         }
 
