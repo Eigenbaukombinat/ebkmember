@@ -1,8 +1,8 @@
-from django.conf.urls import url
+from django.urls import path, include
 
 from . import views
 
 urlpatterns = [
-    url(r'^$', views.register, name='register'),
-    url(r'^preview/?$', views.preview, name='preview'),
+    path('register/', views.register),
+    path('preview/', views.preview),
 ]

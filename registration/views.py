@@ -1,9 +1,6 @@
 #coding:utf8
 from django.shortcuts import render
 from django.core.mail import send_mail, BadHeaderError
-from localflavor.generic.checksums import luhn
-from localflavor.generic.checksums import ean
-from localflavor.generic.checksums import ean
 import ast
 import datetime
 from .models import *
