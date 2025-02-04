@@ -6,6 +6,7 @@ import smtplib
 import sqlite3
 import sys
 import transaction
+import mailer
 
 def db(func):
     def func_wrapper(*args, **kw):
@@ -47,11 +48,7 @@ def send_mail(reg):
     msg['To'] = reg['email']
     msg['CC'] = TO 
 
-    s = smtplib.SMTP(SERVER, PORT)
-    if (USER and PW):
-        s.login(USER, PW)
-    s.send_message(msg)
-    s.quit()
+    mailer.send_mail(msg)
 
 
 for reg in new_regs:

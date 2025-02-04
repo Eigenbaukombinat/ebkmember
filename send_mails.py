@@ -3,7 +3,7 @@ import smtplib
 from email.message import EmailMessage
 import sys
 from mailconfig import SERVER, PORT, USER, PW, FROM, TO, URL, CC
-
+from mailer import send_mail
 
 def db(func):
     def func_wrapper(*args, **kw):
@@ -20,7 +20,6 @@ def db(func):
 def get_new_registrations(c):
     c.execute("SELECT * FROM registration_member where status='pending'");
     return c.fetchall()
-
 
 new_regs = get_new_registrations()
 if not new_regs:
@@ -41,9 +40,4 @@ msg['From'] = FROM
 msg['To'] = TO
 if CC:
     msg['CC'] = CC
-
-s = smtplib.SMTP(SERVER, PORT)
-if (USER and PW):
-    s.login(USER, PW)
-s.send_message(msg)
-s.quit()
+send_mail(msg)
