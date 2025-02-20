@@ -4,6 +4,7 @@
 *~
 __pycache__
 collmex.ini
+pyvenv.cfg
 db.sqlite3
 /static
 .DS_Store
